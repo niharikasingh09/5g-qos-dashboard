@@ -212,7 +212,7 @@ if st.session_state.running:
     ml_anomaly = False
 
     if mode == "Real":
-        sniff(count=5, prn=handle_packet, store=False, timeout=0.05)
+        st.warning("⚠️ Real mode only works on local system")
 
     else:
         # Simulation mode
@@ -225,6 +225,7 @@ if st.session_state.running:
 
             handle_packet(FakePkt())
 
+    # 👇 YE LINE SAME RAHEGI (IMPORTANT)
     m = st.session_state.core.get_metrics(st.session_state.attack_mode)
 
     # Process Core Anomalies
