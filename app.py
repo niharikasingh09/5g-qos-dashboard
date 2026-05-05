@@ -142,13 +142,13 @@ def styled_metric(label, value, z_val=0, is_anom=False, suffix=""):
 def handle_packet(pkt):
     now = time.time()
     st.session_state.packet_count += 1
-      if IP not in pkt:
-        # Simulation packet handling
-        d = np.random.uniform(5, 100)
-        st.session_state.delays.append(d)
-        st.session_state.jitters.append(np.random.uniform(1, 20))
-        st.session_state.throughputs.append(len(pkt) * 8 / 1024)
-        return
+    if IP not in pkt:
+    # Simulation packet handling
+       d = np.random.uniform(5, 100)
+       st.session_state.delays.append(d)
+       st.session_state.jitters.append(np.random.uniform(1, 20))
+       st.session_state.throughputs.append(len(pkt) * 8 / 1024)
+       return
 
     # --- GTP-U Detection ---
     if is_gtpu(pkt):
