@@ -142,13 +142,13 @@ def styled_metric(label, value, z_val=0, is_anom=False, suffix=""):
 def handle_packet(pkt):
     now = time.time()
     st.session_state.packet_count += 1
+
     if IP not in pkt:
-    # Simulation packet handling
-       d = np.random.uniform(5, 100)
-       st.session_state.delays.append(d)
-       st.session_state.jitters.append(np.random.uniform(1, 20))
-       st.session_state.throughputs.append(len(pkt) * 8 / 1024)
-       return
+        d = np.random.uniform(5, 100)
+        st.session_state.delays.append(d)
+        st.session_state.jitters.append(np.random.uniform(1, 20))
+        st.session_state.throughputs.append(len(pkt) * 8 / 1024)
+        return
 
     # --- GTP-U Detection ---
     if is_gtpu(pkt):
@@ -192,10 +192,6 @@ with st.sidebar:
         st.session_state.running = True
     if st.button("⏹ STOP ENGINE", use_container_width=True):
         st.session_state.running = False
-    if st.button("▶ START MONITORING", use_container_width=True, type="primary"):
-        st.session_state.running = True
-    if st.button("⏹ STOP ENGINE", use_container_width=True):
-        st.session_state.running = False
     st.divider()
     st.subheader("Simulate Failures")
     if st.button("🚨 AMF STORM"): st.session_state.attack_mode = "Signaling Storm"
@@ -209,23 +205,24 @@ with st.sidebar:
 st.title("5G QoS & Multi-Plane Anomaly Center")
 
 if st.session_state.running:
-    ml_anomaly = False   # ✅ define once here
+    ml_anomaly = False
 
     if mode == "Real":
-    sniff(count=5, prn=handle_packet, store=False, timeout=0.05)
+        sniff(count=5, prn=handle_packet, store=False, timeout=0.05)
 
-else:
-    # Simulation mode
-    for _ in range(5):
-        fake_pkt_size = np.random.randint(60, 1500)
+    else:
+        # Simulation mode
+        for _ in range(5):
+            fake_pkt_size = np.random.randint(60, 1500)
 
-        class FakePkt:
-            def __len__(self):
-                return fake_pkt_size
+            class FakePkt:
+                def __len__(self):
+                    return fake_pkt_size
 
-        handle_packet(FakePkt())
+            handle_packet(FakePkt())
+
     m = st.session_state.core.get_metrics(st.session_state.attack_mode)
-    
+
     # Process Core Anomalies
     results = {}
     for p in ["AMF", "SMF", "UPF"]:
