@@ -143,13 +143,17 @@ def handle_packet(pkt):
     now = time.time()
     st.session_state.packet_count += 1
 
-    if IP not in pkt:
+    try:
+        has_ip = IP in pkt
+    except:
+        has_ip = False
+
+    if not has_ip:
         d = np.random.uniform(5, 100)
         st.session_state.delays.append(d)
         st.session_state.jitters.append(np.random.uniform(1, 20))
         st.session_state.throughputs.append(len(pkt) * 8 / 1024)
         return
-
     # --- GTP-U Detection ---
     if is_gtpu(pkt):
         st.session_state.logs.append({
