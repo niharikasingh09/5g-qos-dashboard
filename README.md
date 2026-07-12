@@ -23,6 +23,12 @@ This project focuses on building an intelligent monitoring and analytics system 
 The system combines networking, machine learning, real-time analytics, and deployment engineering into a unified observability platform.
 
 ---
+## 🌐 Live Demo
+
+🚀 **Try the application here:** https://5g-qos-dashboard-ns.streamlit.app/
+
+> **Note:** The deployed version runs in **Simulation Mode** because Streamlit Community Cloud does not support raw packet capture (Scapy requires administrator/root privileges). The complete application with **Real Packet Capture Mode** is available when running locally.
+
 
 # ✨ Key Features
 
