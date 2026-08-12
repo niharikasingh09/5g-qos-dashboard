@@ -169,17 +169,13 @@ To solve this, the system was engineered with a simulation fallback layer, enabl
 As part of a 6-member team, I worked on:
 
 - Data capture and packet-level processing
-- QoS feature extraction:
-  - Latency
-  - Jitter
-  - Throughput
 - Hybrid anomaly detection implementation using:
   - Z-score for real-time deviation monitoring across AMF, SMF, and UPF
   - Isolation Forest for multidimensional QoS anomaly detection
 - Deployment engineering using dual-mode architecture:
   - Real packet capture using Scapy (local execution)
   - Simulation layer for cloud compatibility
-- Streamlit-based dashboard deployment and monitoring workflow
+
 
 ---
 
